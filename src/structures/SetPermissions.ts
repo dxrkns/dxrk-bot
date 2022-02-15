@@ -19,7 +19,11 @@ export const setGuildPermissions = ({
       const roles = getRoles(cmd.name);
       if (!roles) return acc;
       const permissions = roles?.reduce((a, role) => {
-        return [...a, { id: role.id, type: "ROLE", permission: true }];
+        return [
+          ...a,
+          { id: role.id, type: "ROLE", permission: true },
+          { id: guild.ownerId, type: "USER", permission: true },
+        ];
       }, []);
 
       return [...acc, { id: cmd.id, permissions }];
