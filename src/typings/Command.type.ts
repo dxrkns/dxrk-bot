@@ -22,8 +22,13 @@ interface RunOptions {
 
 type RunFunction = (option: RunOptions) => any;
 
+type IPermissionType = "BotOwner" | "ServerOwner" | "Admins" | "OpenToAll";
+
 export type CommandType = {
   userPermissions?: PermissionResolvable;
+  title: string;
+  category: string; //Can be Name of the folder file is in
+  permissionType: IPermissionType[];
   run: RunFunction;
 } & ChatInputApplicationCommandData;
 
