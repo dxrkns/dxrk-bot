@@ -3,8 +3,12 @@ declare global {
     interface ProcessEnv {
       botToken: string;
       guildId?: string;
-      environment: "dev|prod|debug";
-      db_Url: string;
+      environment: "dev" | "prod" | "debug";
+      db_name: string;
+      db_user: string;
+      db_pass: string;
+      db_host: string;
+      db_port: string;
     }
   }
 }
