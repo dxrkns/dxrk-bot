@@ -4,5 +4,5 @@ import loadModels from "../../database/loadModels";
 
 export default new Event("ready", () => {
   console.log(`${bot.user.username} is online`);
-  // loadModels();
+  loadModels();
 });

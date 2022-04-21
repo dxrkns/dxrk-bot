@@ -5,7 +5,7 @@ import { ExtendedInteraction } from "../../typings/Command.type";
 
 export default new Event("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
-  await interaction.deferReply({ ephemeral: true });
+  await interaction.deferReply({ ephemeral: false });
   const command = bot.commands.get(interaction.commandName);
   if (!command) return;
   command.run({
