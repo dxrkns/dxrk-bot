@@ -1,7 +1,9 @@
-#### Step 1 - npm i discord.js dotenv glob pg pg-hstore sequelize uuid
+#### Step 1 - npm i
 
-#### Step 2 - npm i -D @types/glob @types/node @types/validator ts-node ts-node-dev typescript @types/pg @types/uuid
+#### Step 2 - Create .env file in root directory where src is located.
 
-#### Step 3 - Create .env file and copy everything from env.example and fill info.
+#### Step 3 - Copy everything from env.example to .env.
 
-#### Step 4 - npm run start:dev
+#### Step 4 - Fill the appropriate values.
+
+#### Step 5 - npm run start:dev.
