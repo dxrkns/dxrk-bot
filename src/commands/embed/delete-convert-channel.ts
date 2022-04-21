@@ -19,23 +19,31 @@ export default new Command({
   ],
 
   run: async ({ interaction, args }) => {
-    const isAdmin = checkAdmin(interaction);
-    if (!isAdmin) return interaction.editReply({ content: `Access Denied.` });
-    const inputChannel = args.getChannel("input-channel");
+    try {
+      const isAdmin = checkAdmin(interaction);
+      if (!isAdmin) return interaction.editReply({ content: `Access Denied.` });
+      const inputChannel = args.getChannel("input-channel");
 
-    const tracking = await EmbedChannelDB.findOne({
-      where: { guildId: interaction.guildId, inputChannelId: inputChannel.id },
-    });
-
-    if (!tracking)
-      return interaction.editReply({
-        content: `No tracking found for channel ${inputChannel}`,
+      const tracking = await EmbedChannelDB.findOne({
+        where: {
+          guildId: interaction.guildId,
+          inputChannelId: inputChannel.id,
+        },
       });
 
-    await tracking.destroy();
+      if (!tracking)
+        return interaction.editReply({
+          content: `No tracking found for channel ${inputChannel}`,
+        });
 
-    await interaction.editReply({
-      content: `Deleted tracking for ${inputChannel}`,
-    });
+      await tracking.destroy();
+
+      await interaction.editReply({
+        content: `Deleted tracking for ${inputChannel}`,
+      });
+    } catch (error) {
+      console.log(error);
+      return interaction.editReply({ content: `Error Occured. Try again.` });
+    }
   },
 });

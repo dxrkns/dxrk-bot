@@ -26,33 +26,38 @@ export default new Command({
   ],
 
   run: async ({ interaction, args }) => {
-    const isAdmin = checkAdmin(interaction);
-    if (!isAdmin) return interaction.editReply({ content: `Access Denied.` });
-    const inputChannel = args.getChannel("input");
-    const outputChannel = args.getChannel("output");
+    try {
+      const isAdmin = checkAdmin(interaction);
+      if (!isAdmin) return interaction.editReply({ content: `Access Denied.` });
+      const inputChannel = args.getChannel("input");
+      const outputChannel = args.getChannel("output");
 
-    if (inputChannel.type !== "GUILD_TEXT")
-      return interaction.editReply({
-        content: `${inputChannel} is not a text channel. Only text channel allowed`,
+      if (inputChannel.type !== "GUILD_TEXT")
+        return interaction.editReply({
+          content: `${inputChannel} is not a text channel. Only text channel allowed`,
+        });
+
+      if (outputChannel.type !== "GUILD_TEXT")
+        return interaction.editReply({
+          content: `${outputChannel} is not a text channel. Only text channel allowed`,
+        });
+
+      await EmbedChannelDB.create({
+        id: uuidV4(),
+        inputChannelId: inputChannel.id,
+        outputChannelId: outputChannel.id,
+        guildId: interaction.guildId,
+        guildName: interaction.guild.name,
+        adminId: interaction.user.id,
+        adminName: `${interaction.user.username}#${interaction.user.discriminator}`,
       });
 
-    if (outputChannel.type !== "GUILD_TEXT")
-      return interaction.editReply({
-        content: `${outputChannel} is not a text channel. Only text channel allowed`,
+      await interaction.editReply({
+        content: `Tracking set for ${inputChannel} in ${outputChannel}`,
       });
-
-    await EmbedChannelDB.create({
-      id: uuidV4(),
-      inputChannelId: inputChannel.id,
-      outputChannelId: outputChannel.id,
-      guildId: interaction.guildId,
-      guildName: interaction.guild.name,
-      adminId: interaction.user.id,
-      adminName: `${interaction.user.username}#${interaction.user.discriminator}`,
-    });
-
-    await interaction.editReply({
-      content: `Tracking set for ${inputChannel} in ${outputChannel}`,
-    });
+    } catch (error) {
+      console.log(error);
+      return interaction.editReply({ content: `Error Occured. Try again.` });
+    }
   },
 });
