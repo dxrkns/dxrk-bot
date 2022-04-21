@@ -1,3 +1,3 @@
-import { EmbedChannelDB } from "./EmbedChannel.model";
+import { EmbedChannelDB } from "./embedChannel.model";
 
 export { EmbedChannelDB };
