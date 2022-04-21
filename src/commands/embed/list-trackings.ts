@@ -1,5 +1,6 @@
 import { MessageEmbed } from "discord.js";
 import { EmbedChannelDB } from "../../database/models/modelsIndex";
+import { checkAdmin } from "../../helper/getPermissions";
 import { Command } from "../../structures/Command";
 
 export default new Command({
@@ -11,6 +12,8 @@ export default new Command({
   userPermissions: ["ADMINISTRATOR"],
 
   run: async ({ interaction, bot }) => {
+    const isAdmin = checkAdmin(interaction);
+    if (!isAdmin) return interaction.editReply({ content: `Access Denied.` });
     const trackings = await EmbedChannelDB.findAll({
       where: { guildId: interaction.guildId },
     });

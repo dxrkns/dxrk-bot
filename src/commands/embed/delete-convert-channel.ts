@@ -1,4 +1,5 @@
 import { EmbedChannelDB } from "../../database/models/modelsIndex";
+import { checkAdmin } from "../../helper/getPermissions";
 import { Command } from "../../structures/Command";
 
 export default new Command({
@@ -18,6 +19,8 @@ export default new Command({
   ],
 
   run: async ({ interaction, args }) => {
+    const isAdmin = checkAdmin(interaction);
+    if (!isAdmin) return interaction.editReply({ content: `Access Denied.` });
     const inputChannel = args.getChannel("input-channel");
 
     const tracking = await EmbedChannelDB.findOne({

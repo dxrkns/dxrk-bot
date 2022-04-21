@@ -1,4 +1,5 @@
 import { MessageEmbed } from "discord.js";
+import { checkAdmin, checkOwner } from "../../helper/getPermissions";
 import { Command } from "../../structures/Command";
 import { CommandType } from "../../typings/Command.type";
 
@@ -10,6 +11,10 @@ export default new Command({
   category: "Utilities",
   permissionType: ["ServerOwner", "BotOwner"],
   run: async ({ interaction, bot }) => {
+    const isAdmin = checkAdmin(interaction);
+    const isBotOwner = await checkOwner(interaction);
+    if (!isAdmin && isBotOwner)
+      return interaction.editReply({ content: `Access Denied.` });
     const commands: CommandType[] = [];
     bot.commands.map((command) => commands.push(command));
 

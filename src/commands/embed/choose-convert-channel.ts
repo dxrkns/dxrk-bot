@@ -1,6 +1,7 @@
 import { EmbedChannelDB } from "../../database/models/modelsIndex";
 import { Command } from "../../structures/Command";
 import { v4 as uuidV4 } from "uuid";
+import { checkAdmin } from "../../helper/getPermissions";
 
 export default new Command({
   name: "choose-convert-channel",
@@ -25,6 +26,8 @@ export default new Command({
   ],
 
   run: async ({ interaction, args }) => {
+    const isAdmin = checkAdmin(interaction);
+    if (!isAdmin) return interaction.editReply({ content: `Access Denied.` });
     const inputChannel = args.getChannel("input");
     const outputChannel = args.getChannel("output");
 
