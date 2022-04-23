@@ -32,12 +32,18 @@ export default new Command({
       const inputChannel = args.getChannel("input");
       const outputChannel = args.getChannel("output");
 
-      if (inputChannel.type !== "GUILD_TEXT")
+      if (
+        inputChannel.type !== "GUILD_NEWS" &&
+        inputChannel.type !== "GUILD_TEXT"
+      )
         return interaction.editReply({
           content: `${inputChannel} is not a text channel. Only text channel allowed`,
         });
 
-      if (outputChannel.type !== "GUILD_TEXT")
+      if (
+        outputChannel.type !== "GUILD_NEWS" &&
+        outputChannel.type !== "GUILD_TEXT"
+      )
         return interaction.editReply({
           content: `${outputChannel} is not a text channel. Only text channel allowed`,
         });
