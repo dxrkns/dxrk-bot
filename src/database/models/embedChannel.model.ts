@@ -1,6 +1,6 @@
 import { Model, BuildOptions, Sequelize, DataTypes } from "sequelize";
 import db from "../db";
-// change CollectionChannel
+
 export interface IEmbedChannel {
   id: string;
   inputChannelId: string;

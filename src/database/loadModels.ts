@@ -1,11 +1,12 @@
 import db from "./db";
-import { EmbedChannelDB } from "./models/modelsIndex";
+import { EmbedChannelDB, AutoPublishDB } from "./models/modelsIndex";
 
 export default () => {
   db.authenticate()
     .then(() => {
       console.log("DB Connected...");
       EmbedChannelDB.sync();
+      AutoPublishDB.sync();
     })
     .catch((err) => console.log(err));
 };
