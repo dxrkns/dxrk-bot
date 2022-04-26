@@ -5,7 +5,6 @@ import { EmbedChannelDB } from "../../database/models/modelsIndex";
 export const embedMessage = async (message: Message<boolean>) => {
   try {
     if (message.author.id === bot.user.id) return;
-    console.log(message);
 
     if (
       message.channel.type !== "GUILD_TEXT" &&
