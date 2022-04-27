@@ -33,23 +33,23 @@ export const embedMessage = async (message: Message<boolean>) => {
       messages.forEach((message, i) => {
         const channelEmbed = new MessageEmbed()
           .setAuthor({
-            name: author.username,
-            iconURL: author.avatarURL(),
+            name: author?.username,
+            iconURL: author?.avatarURL(),
           })
           .setDescription(message);
         outputChannel.send({ embeds: [channelEmbed] });
       });
     }
     if (attachments.length > 0) {
-      attachments.forEach(async (attachment, i) => {
+      attachments.forEach((attachment, i) => {
         try {
           const attachmentEmbed = new MessageEmbed()
             .setAuthor({
-              name: author.username,
-              iconURL: author.avatarURL(),
+              name: author?.username,
+              iconURL: author?.avatarURL(),
             })
             .addField(`\u200b`, `Attachment - ${attachment.url}`);
-          await outputChannel.send({
+          outputChannel.send({
             embeds: [attachmentEmbed],
           });
         } catch (error) {
@@ -59,14 +59,14 @@ export const embedMessage = async (message: Message<boolean>) => {
     }
 
     if (stickers.length > 0) {
-      stickers.forEach(async (sticker, i) => {
+      stickers.forEach((sticker, i) => {
         const stickerEmbed = new MessageEmbed()
           .setAuthor({
-            name: author.username,
-            iconURL: author.avatarURL(),
+            name: author?.username,
+            iconURL: author?.avatarURL(),
           })
-          .addField(`\u200b`, `Sticker - ${sticker.name}`);
-        await outputChannel.send({
+          .addField(`\u200b`, `Sticker - ${sticker?.name}`);
+        outputChannel.send({
           embeds: [stickerEmbed],
         });
       });
