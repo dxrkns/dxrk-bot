@@ -30,9 +30,9 @@ export class ExtendClient extends Client {
     this.guilds.cache.forEach((guild) => {
       guild.commands
         .set(commands)
-        .then((commandCollection) => {
-          setGuildPermissions({ guild, commands, commandCollection });
-        })
+        // .then((commandCollection) => {
+        //   setGuildPermissions({ guild, commands, commandCollection });
+        // })
         .catch((err) => console.log(err));
     });
     console.log(`Registering commands to ${this.guilds.cache.size} servers.`);

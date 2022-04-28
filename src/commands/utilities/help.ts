@@ -13,9 +13,7 @@ export default new Command({
   run: async ({ interaction, bot }) => {
     try {
       const isAdmin = checkAdmin(interaction);
-      const isBotOwner = await checkOwner(interaction);
-      if (!isAdmin && isBotOwner)
-        return interaction.editReply({ content: `Access Denied.` });
+      if (!isAdmin) return interaction.editReply({ content: `Access Denied.` });
       const commands: CommandType[] = [];
       bot.commands.map((command) => commands.push(command));
 
