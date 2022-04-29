@@ -6,10 +6,10 @@ import { CommandType } from "../../typings/Command.type";
 export default new Command({
   name: "help",
   description: "List all commands.",
-  userPermissions: ["ADMINISTRATOR"],
+  // userPermissions: ["ADMINISTRATOR"],
   title: "Help",
-  masterCommand: false,
   category: "Utilities",
+  masterCommand: false,
   permissionType: ["ServerOwner", "BotOwner"],
   run: async ({ interaction, bot }) => {
     try {
@@ -28,9 +28,16 @@ export default new Command({
             title,
             category,
             options,
+            masterCommand,
           },
           i
         ) => {
+          if (
+            masterCommand &&
+            (interaction.guildId !== process.env.masterServerId ||
+              !process.env.masterServerId)
+          )
+            return;
           const helpEmbed = new MessageEmbed()
             .setTitle(`${title} (${category})`)
             .setURL(bot.user.displayAvatarURL())
@@ -44,12 +51,13 @@ export default new Command({
                 value: `**About**: \`${description}\``,
               },
               {
-                name: `Pemission Required: \`${
+                name: `User Pemission Required: \`${
                   userPermissions ? userPermissions.toString() : "None"
                 }\``,
                 value: `**Type**: \`${permissionType.toString()}\``,
               }
             );
+
           if (options?.length > 0) {
             helpEmbed.addField(`\u200b`, `***__Arguments__***`);
             options.forEach(({ name, type }, i) => {
