@@ -8,6 +8,7 @@ export default new Command({
   description: "Set channels for input and out of embed messages.",
   title: "Choose Convert Channel",
   category: "Embed",
+  masterCommand: false,
   permissionType: ["Admins"],
   userPermissions: ["ADMINISTRATOR"],
   options: [

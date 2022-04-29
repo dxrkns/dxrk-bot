@@ -9,6 +9,7 @@ export default new Command({
   description: "List auto publishes..",
   title: "List Auto Publish",
   category: "Publish",
+  masterCommand: false,
   permissionType: ["Admins"],
   userPermissions: ["ADMINISTRATOR"],
 

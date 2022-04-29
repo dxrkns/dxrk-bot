@@ -28,6 +28,7 @@ export type CommandType = {
   userPermissions?: PermissionResolvable;
   title: string;
   category: string; //Can be Name of the folder file is in
+  masterCommand: boolean;
   permissionType: IPermissionType[];
   run: RunFunction;
 } & ChatInputApplicationCommandData;

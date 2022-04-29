@@ -8,6 +8,7 @@ export default new Command({
   description: "Set announcement channel for auto publish..",
   title: "Auto Publish",
   category: "Publish",
+  masterCommand: false,
   permissionType: ["Admins"],
   userPermissions: ["ADMINISTRATOR"],
   options: [

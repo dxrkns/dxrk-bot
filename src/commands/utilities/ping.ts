@@ -5,6 +5,7 @@ export default new Command({
   description: "Sends delay time of reply in milli secs.",
   title: "Ping",
   category: "Utilities",
+  masterCommand: false,
   permissionType: ["OpenToAll"],
 
   run: async ({ interaction, bot }) => {

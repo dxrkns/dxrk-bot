@@ -5,6 +5,7 @@ declare global {
       guildId?: string;
       environment: "dev" | "prod" | "debug";
       DATABASE_URL: string;
+      masterServerId: string;
     }
   }
 }

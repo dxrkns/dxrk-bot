@@ -7,6 +7,7 @@ export default new Command({
   description: "Delete embed conversion tracking.",
   title: "Delete Convert Channel",
   category: "Embed",
+  masterCommand: false,
   permissionType: ["Admins"],
   userPermissions: ["ADMINISTRATOR"],
   options: [

@@ -9,7 +9,6 @@ import glob from "glob";
 import { promisify } from "util";
 import { RegisterCommandsOptions } from "../typings/Client.type";
 import { Event } from "./Events";
-import { setGuildPermissions } from "./SetPermissions";
 
 const glopPromise = promisify(glob);
 export class ExtendClient extends Client {
@@ -27,15 +26,23 @@ export class ExtendClient extends Client {
   }
 
   async registerCommands({ commands, guildId }: RegisterCommandsOptions) {
+    if (process.env.environment === "dev") return;
+    const commonCommands = commands.filter(
+      (command) => command.masterCommand === false
+    );
     this.guilds.cache.forEach((guild) => {
-      guild.commands
-        .set(commands)
-        // .then((commandCollection) => {
-        //   setGuildPermissions({ guild, commands, commandCollection });
-        // })
-        .catch((err) => console.log(err));
+      guild.commands.set(commonCommands).catch((err) => console.log(err));
     });
-    console.log(`Registering commands to ${this.guilds.cache.size} servers.`);
+    console.log(
+      `Registering ${commonCommands.length} commands to ${this.guilds.cache.size} servers.`
+    );
+    if (process.env.masterServerId) {
+      const masterGuild = this.guilds.cache.get(process.env.masterServerId);
+      masterGuild.commands.set(commands).catch((err) => console.log(err));
+      console.log(
+        `Registering ${commands.length} commands to ${masterGuild.name}.`
+      );
+    }
   }
 
   async registerModules() {

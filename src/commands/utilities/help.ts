@@ -8,6 +8,7 @@ export default new Command({
   description: "List all commands.",
   userPermissions: ["ADMINISTRATOR"],
   title: "Help",
+  masterCommand: false,
   category: "Utilities",
   permissionType: ["ServerOwner", "BotOwner"],
   run: async ({ interaction, bot }) => {

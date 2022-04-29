@@ -7,6 +7,7 @@ export default new Command({
   description: "Disable auto publish..",
   title: "Disable Auto Publish",
   category: "Publish",
+  masterCommand: false,
   permissionType: ["Admins"],
   userPermissions: ["ADMINISTRATOR"],
   options: [

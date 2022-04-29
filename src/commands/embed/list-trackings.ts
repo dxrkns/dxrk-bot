@@ -8,6 +8,7 @@ export default new Command({
   description: "List all the trackings.",
   title: "List Trackings",
   category: "Embed",
+  masterCommand: false,
   permissionType: ["Admins"],
   userPermissions: ["ADMINISTRATOR"],
 
