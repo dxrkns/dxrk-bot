@@ -49,6 +49,18 @@ export default new Command({
           content: `${outputChannel} is not a text channel. Only text channel allowed`,
         });
 
+      const tracking = await EmbedChannelDB.findOne({
+        where: {
+          inputChannelId: inputChannel.id,
+          outputChannelId: outputChannel.id,
+          guildId: interaction.guildId,
+        },
+      });
+      if (tracking)
+        return interaction.editReply({
+          content: `Tracking already added for the info provided.`,
+        });
+
       await EmbedChannelDB.create({
         id: uuidV4(),
         inputChannelId: inputChannel.id,
