@@ -26,7 +26,10 @@ export class ExtendClient extends Client {
   }
 
   async registerCommands({ commands, guildId }: RegisterCommandsOptions) {
-    if (process.env.environment === "dev") return;
+    if (process.env.environment === "dev")
+      return console.log(
+        `Running in ${process.env.environment || "no"} environment.`
+      );
     const commonCommands = commands.filter(
       (command) => command.masterCommand === false
     );
