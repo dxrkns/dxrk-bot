@@ -49,6 +49,8 @@ export const embedMessage = async (message: Message<boolean>) => {
         });
 
         if (message.content && message.embeds.length > 0) {
+          channelEmbed.setDescription(message.content);
+          await outputChannel.send({ embeds: [channelEmbed] });
           message.embeds.forEach((embed) => {
             outputChannel.send({
               content: author.username,
