@@ -5,7 +5,6 @@ export default new Event("messageCreate", async (message) => {
   try {
     if (message.author.bot) return;
 
-    console.log(message);
     if (
       !process.env.guildId ||
       (message.guild.id !== process.env.guildId && !process.env.multiServer)
